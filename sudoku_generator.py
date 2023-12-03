@@ -22,8 +22,9 @@ class SudokuGenerator:
 	Return:
 	None
     '''
-    def __init__(self, row_length, removed_cells):
-        pass
+    def __init__(self, removed_cells, row_length = 9):
+        self.row_length = row_length
+        self.removed_cells = removed_cells
 
     '''
 	Returns a 2D python list of numbers which represents the board
@@ -55,8 +56,11 @@ class SudokuGenerator:
 	Return: boolean
     '''
     def valid_in_row(self, row, num):
-        pass
-
+        temp = []
+        if num in temp[row]:
+            return False
+        else:
+            return True
     '''
 	Determines if num is contained in the specified column (vertical) of the board
     If num is already in the specified col, return False. Otherwise, return True
@@ -68,7 +72,11 @@ class SudokuGenerator:
 	Return: boolean
     '''
     def valid_in_col(self, col, num):
-        pass
+        temp = []
+        if num in temp[col]:
+            return False
+        else:
+            return True
 
     '''
 	Determines if num is contained in the 3x3 box specified on the board
