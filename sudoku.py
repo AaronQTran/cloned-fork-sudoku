@@ -1,6 +1,7 @@
 import pygame
 from sudoku_board import Board
 import sys
+from sudoku_cell import Cell
 
 
 def game_start_screen(screen):
@@ -89,6 +90,7 @@ def game_screen(screen, difficulty):
     running = True
     main_board = Board(screen,difficulty)
     main_board.draw()
+
     #print("yo")
     while running:
         # poll for events
