@@ -1,5 +1,5 @@
 import pygame
-import sudoku_generator as sg
+from sudoku_board import Board as bd
 import sys
 
 
@@ -83,10 +83,9 @@ def game_start_screen(screen):
     pygame.quit()
 
 def game_screen(screen, difficulty):
-    screen = pygame.display.set_mode((540,630))
     clock = pygame.time.Clock()
     running = True
-    print(difficulty)
+    bd.draw()
     while running:
         # poll for events
         # pygame.QUIT event means the user clicked X to close your window
