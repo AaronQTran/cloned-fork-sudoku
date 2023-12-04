@@ -85,7 +85,7 @@ def game_start_screen(screen):
 
 def game_screen(screen, difficulty):
     screen.fill("white")
-
+    green = (0, 255, 0)
     clock = pygame.time.Clock()
     running = True
     main_board = Board(screen,difficulty)
@@ -94,27 +94,64 @@ def game_screen(screen, difficulty):
         for j in range(9):
             if main_board.cell_board[i][j].value != 0:
                 main_board.cell_board[i][j].draw()
+
+    #game_screen buttons
+    button_font = pygame.font.Font('freesansbold.ttf', 30)
+    reset_text = button_font.render('Reset', 0, (255,255,255))
+    restart_text = button_font.render('Restart',0, (255,255,255))
+    exit_text = button_font.render('Exit', 0, (255,255,255))
+
+    #button background size scaling
+    reset_surface = pygame.Surface((reset_text.get_size()[0] + 20, reset_text.get_size()[1] + 15))
+    restart_surface = pygame.Surface((restart_text.get_size()[0] + 20, restart_text.get_size()[1] + 15))
+    exit_surface = pygame.Surface((exit_text.get_size()[0] + 20, restart_text.get_size()[1] + 15))
+
+    #button background coloring
+    reset_surface.fill(green)
+    restart_surface.fill(green)
+    exit_surface.fill(green)
+
+    #white text in green bckground
+    reset_surface.blit(reset_text, (10,10))
+    restart_surface.blit(restart_text,(10,10))
+    exit_surface.blit(exit_text, (10, 10))
+
+    #initialize buton rectangle
+    reset_rectangle = reset_surface.get_rect(center = (530//4, 600//2 + 270))
+    restart_rectangle = restart_surface.get_rect(center = (530//1.3, 600//2 + 270))
+    exit_rectangle = exit_surface.get_rect(center =  (530//2, 600//2 + 270))
+
+    screen.blit(reset_surface,reset_rectangle)
+    screen.blit(restart_surface, restart_rectangle)
+    screen.blit(exit_surface, exit_rectangle)
+
+
     #print("yo")
     while running:
-        # poll for events
-        # pygame.QUIT event means the user clicked X to close your window
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
             if event.type == pygame.MOUSEBUTTONDOWN:
+
                 x,y = event.pos
                 print(x//60,y//60)
                 main_board.select(y//60,x//60)
 
         # fill the screen with a color to wipe away anything from last frame
 
+                if reset_rectangle.collidepoint(event.pos):
+                    pass
+                if restart_rectangle.collidepoint(event.pos):
+                    pass
+                if exit_rectangle.collidepoint(event.pos):
+                    pass
 
-        # RENDER YOUR GAME HERE
 
-        # flip() the display to put your work on screen
+
         pygame.display.flip()
 
-        clock.tick(60)  # limits FPS to 60
+        clock.tick(60)
 
     pygame.quit()
 
