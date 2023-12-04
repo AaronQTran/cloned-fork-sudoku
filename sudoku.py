@@ -1,5 +1,5 @@
 import pygame
-import sudoku_generator as sg
+from sudoku_board import Board
 import sys
 
 
@@ -18,7 +18,7 @@ def game_start_screen(screen):
     title_font = pygame.font.Font('freesansbold.ttf', 32)
     text = title_font.render('Welcome to Sudoku', True, green, white)
     textRect = text.get_rect()
-    textRect.center = (540 // 2, 630 // 5)
+    textRect.center = (540 // 2, 600 // 5)
 
     #button font and characteristics
     button_font = pygame.font.Font('freesansbold.ttf', 25)
@@ -46,9 +46,9 @@ def game_start_screen(screen):
     hard_surface.blit(hard_text,(10,10))
 
     #initialize button rectangle
-    easy_rectangle = easy_surface.get_rect(center=(530//2,630//2 + 50))
-    medium_rectangle = medium_surface.get_rect(center=(530//2,630//2 + 120))
-    hard_rectangle = hard_surface.get_rect(center=(530//2,650//2 + 190))
+    easy_rectangle = easy_surface.get_rect(center=(530//2,600//2 + 50))
+    medium_rectangle = medium_surface.get_rect(center=(530//2,600//2 + 120))
+    hard_rectangle = hard_surface.get_rect(center=(530//2,600//2 + 190))
 
     screen.fill(white)
     screen.blit(easy_surface, easy_rectangle)
@@ -83,10 +83,13 @@ def game_start_screen(screen):
     pygame.quit()
 
 def game_screen(screen, difficulty):
-    #screen = pygame.display.set_mode((540,630))
+    screen.fill("white")
+
     clock = pygame.time.Clock()
     running = True
-    print(difficulty)
+    main_board = Board(screen,difficulty)
+    main_board.draw()
+    #print("yo")
     while running:
         # poll for events
         # pygame.QUIT event means the user clicked X to close your window
@@ -95,7 +98,7 @@ def game_screen(screen, difficulty):
                 running = False
 
         # fill the screen with a color to wipe away anything from last frame
-        screen.fill("white")
+
 
         # RENDER YOUR GAME HERE
 
@@ -110,7 +113,7 @@ def game_screen(screen, difficulty):
 
 def main():
     pygame.init()
-    screen = pygame.display.set_mode((540, 630))
+    screen = pygame.display.set_mode((540, 600))
     difficulty = game_start_screen(screen)
     game_screen(screen, difficulty)
 
