@@ -36,13 +36,3 @@ class Board:
     def select(self,row,col):
         pass
 
-a = Board((100,100), 'easy')
-for i in range(9):
-    for j in range(9):
-        print(a.board[i][j], end ='')
-    print()
-print('\n\n\n\n\n')
-for i in range(9):
-    for j in range(9):
-        print(a.cell_board[i][j].value, end='')
-    print()
