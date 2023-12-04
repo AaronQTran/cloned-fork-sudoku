@@ -83,7 +83,7 @@ def game_start_screen(screen):
     pygame.quit()
 
 def game_screen(screen, difficulty):
-    screen = pygame.display.set_mode((540,630))
+    #screen = pygame.display.set_mode((540,630))
     clock = pygame.time.Clock()
     running = True
     print(difficulty)
