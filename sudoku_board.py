@@ -1,5 +1,5 @@
-from sudoku_cell import Cell as ce
-import sudoku_generator as sg
+from sudoku_cell import Cell
+import sudoku_generator
 import pygame
 
 
@@ -14,7 +14,14 @@ class Board:
             self.difficulty = 40
         elif diffuculty == 'hard':
             self.difficulty = 50
-        self.board = sg.generate_sudoku(9, self.difficulty)
+        self.board, self.board_answer = sudoku_generator.generate_sudoku(9, self.difficulty)
+        self.cell_board = []
+        for i in range(9):
+            new = []
+            for j in  range(9):
+                new.append(Cell(self.board[i][j],i,j,screen))
+            self.cell_board.append(new)
+
 
     def draw(self):
         for i in range(0, len(self.board)+ 1):
@@ -25,3 +32,17 @@ class Board:
             pygame.draw.line(self.screen, (0,0,0), (0, i * 180), (self.width, i * 180), 4)
         for i in range(0, len(self.board) + 1):
             pygame.draw.line(self.screen, (0,0,0), (i * 180, 0), (i * 180, self.height - 60), 4)
+
+    def select(self,row,col):
+        pass
+
+a = Board((100,100), 'easy')
+for i in range(9):
+    for j in range(9):
+        print(a.board[i][j], end ='')
+    print()
+print('\n\n\n\n\n')
+for i in range(9):
+    for j in range(9):
+        print(a.cell_board[i][j].value, end='')
+    print()
