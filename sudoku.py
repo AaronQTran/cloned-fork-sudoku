@@ -63,15 +63,15 @@ def game_start_screen(screen):
                  sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if easy_rectangle.collidepoint(event.pos):
-
                     difficulty = "easy"
-                    return
-                if medium_rectangle.collidepoint(event.pos):
+
+
+                elif medium_rectangle.collidepoint(event.pos):
                     difficulty = "medium"
-                    return
-                if hard_rectangle.collidepoint(event.pos):
+
+                elif hard_rectangle.collidepoint(event.pos):
                     difficulty = "hard"
-                    return
+                return difficulty
 
 
 
@@ -82,16 +82,37 @@ def game_start_screen(screen):
 
     pygame.quit()
 
-def game_screen():
+def game_screen(screen, difficulty):
+    screen = pygame.display.set_mode((540,630))
+    clock = pygame.time.Clock()
+    running = True
+    print(difficulty)
+    while running:
+        # poll for events
+        # pygame.QUIT event means the user clicked X to close your window
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
 
-    pass
+        # fill the screen with a color to wipe away anything from last frame
+        screen.fill("white")
+
+        # RENDER YOUR GAME HERE
+
+        # flip() the display to put your work on screen
+        pygame.display.flip()
+
+        clock.tick(60)  # limits FPS to 60
+
+    pygame.quit()
+
 
 
 def main():
     pygame.init()
     screen = pygame.display.set_mode((540, 630))
-    game_start_screen(screen)
-    game_screen()
+    difficulty = game_start_screen(screen)
+    game_screen(screen, difficulty)
 
 
 
