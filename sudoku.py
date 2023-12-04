@@ -65,14 +65,14 @@ def game_start_screen(screen):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if easy_rectangle.collidepoint(event.pos):
                     difficulty = "easy"
-
+                    return difficulty
 
                 elif medium_rectangle.collidepoint(event.pos):
                     difficulty = "medium"
-
+                    return difficulty
                 elif hard_rectangle.collidepoint(event.pos):
                     difficulty = "hard"
-                return difficulty
+                    return difficulty
 
 
 
@@ -137,6 +137,8 @@ def game_screen(screen, difficulty):
                 x,y = event.pos
                 print(x//60,y//60)
                 main_board.select(y//60,x//60)
+
+
 
         # fill the screen with a color to wipe away anything from last frame
 

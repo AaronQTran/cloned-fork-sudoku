@@ -34,7 +34,6 @@ class Board:
             pygame.draw.line(self.screen, (0,0,0), (i * 180, 0), (i * 180, self.height - 60), 4)
 
     def select(self,row,col):
-
         pygame.draw.line(self.screen, ('red'), (col*60, row * 60), (col * 60, (row+1) * 60), 4)
         pygame.draw.line(self.screen, ('red'), (col*60, row * 60), ((col + 1) * 60, (row) * 60), 4)
         pygame.draw.line(self.screen, ('red'), ((col + 1) * 60, row * 60), ((col + 1)* 60, (row + 1) * 60), 4)
