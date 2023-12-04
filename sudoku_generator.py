@@ -22,8 +22,17 @@ class SudokuGenerator:
 	Return:
 	None
     '''
-    def __init__(self, row_length, removed_cells):
-        pass
+    def __init__(self, removed_cells, row_length = 9):
+        self.row_length = row_length
+        self.removed_cells = removed_cells
+        self.box_length = 3
+        new = []
+        for i in range(9):
+            new2 = []
+            for j in range(9):
+                new2.append(0)
+            new.append(new2)
+        self.board = new
 
     '''
 	Returns a 2D python list of numbers which represents the board
@@ -32,7 +41,9 @@ class SudokuGenerator:
 	Return: list[list]
     '''
     def get_board(self):
-        pass
+        return self.board
+
+
 
     '''
 	Displays the board to the console
@@ -42,7 +53,11 @@ class SudokuGenerator:
 	Return: None
     '''
     def print_board(self):
-        pass
+        self.get_board()
+        for i in range(9):
+            for i in range(9):
+                print(self.board[i][j])
+            print()
 
     '''
 	Determines if num is contained in the specified row (horizontal) of the board
@@ -55,8 +70,10 @@ class SudokuGenerator:
 	Return: boolean
     '''
     def valid_in_row(self, row, num):
-        pass
-
+        if num in self.board[row]:
+            return False
+        else:
+            return True
     '''
 	Determines if num is contained in the specified column (vertical) of the board
     If num is already in the specified col, return False. Otherwise, return True
@@ -68,7 +85,10 @@ class SudokuGenerator:
 	Return: boolean
     '''
     def valid_in_col(self, col, num):
-        pass
+        for i in range(9):
+            if self.board[i][col] == num:
+                return False
+        return True
 
     '''
 	Determines if num is contained in the 3x3 box specified on the board
@@ -83,7 +103,11 @@ class SudokuGenerator:
 	Return: boolean
     '''
     def valid_in_box(self, row_start, col_start, num):
-        pass
+        for i in range(3):
+            for j in range(3):
+                if self.board[row_start + i][col_start + j] == num:
+                    return False
+        return True
     
     '''
     Determines if it is valid to enter num at (row, col) in the board
