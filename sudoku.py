@@ -1,12 +1,12 @@
 import pygame
 import sudoku_generator as sg
+import sys
+
+
+def game_start_screen(screen):
 
 
 
-def game_start_screen():
-
-    pygame.init()
-    screen = pygame.display.set_mode((540,630))
     clock = pygame.time.Clock()
     running = True
 
@@ -51,27 +51,30 @@ def game_start_screen():
     hard_rectangle = hard_surface.get_rect(center=(530//2,650//2 + 190))
 
     screen.fill(white)
-
+    screen.blit(easy_surface, easy_rectangle)
+    screen.blit(medium_surface, medium_rectangle)
+    screen.blit(hard_surface, hard_rectangle)
     while running:
 
         screen.blit(text, textRect)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                 running = False
+                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if easy_rectangle.collidepoint(event.pos):
 
                     difficulty = "easy"
-                    screen.fill(black)
+                    return
                 if medium_rectangle.collidepoint(event.pos):
                     difficulty = "medium"
+                    return
                 if hard_rectangle.collidepoint(event.pos):
                     difficulty = "hard"
-        #draw buttons
-        screen.blit(easy_surface, easy_rectangle)
-        screen.blit(medium_surface, medium_rectangle)
-        screen.blit(hard_surface, hard_rectangle)
+                    return
+
+
+
 
         pygame.display.flip()
 
@@ -79,8 +82,19 @@ def game_start_screen():
 
     pygame.quit()
 
+def game_screen():
+
+    pass
+
+
 def main():
-    game_start_screen()
+    pygame.init()
+    screen = pygame.display.set_mode((540, 630))
+    game_start_screen(screen)
+    game_screen()
+
+
+
 
 
 
