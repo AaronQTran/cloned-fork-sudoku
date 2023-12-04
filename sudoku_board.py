@@ -4,16 +4,16 @@ import pygame
 
 
 class Board:
-    def __init__(self, width, height, screen, diffuculty):
-        self.width = 9
-        self.height = 9
+    def __init__(self, screen, diffuculty):
+        self.width = 540
+        self.height = 630
         self.screen = screen
         if diffuculty == 'easy':
             self.difficulty = 30
         elif diffuculty == 'medium':
-            self.difficulty = 30
+            self.difficulty = 40
         elif diffuculty == 'hard':
-            self.difficulty = 30
+            self.difficulty = 50
         self.board = sg.generate_sudoku(9, self.difficulty)
 
     def draw(self):
