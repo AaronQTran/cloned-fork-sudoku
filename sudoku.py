@@ -90,7 +90,10 @@ def game_screen(screen, difficulty):
     running = True
     main_board = Board(screen,difficulty)
     main_board.draw()
-
+    for i in range(9):
+        for j in range(9):
+            if main_board.cell_board[i][j].value != 0:
+                main_board.cell_board[i][j].draw()
     #print("yo")
     while running:
         # poll for events
@@ -98,6 +101,10 @@ def game_screen(screen, difficulty):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                x,y = event.pos
+                print(x//60,y//60)
+                main_board.select(y//60,x//60)
 
         # fill the screen with a color to wipe away anything from last frame
 

@@ -34,15 +34,7 @@ class Board:
             pygame.draw.line(self.screen, (0,0,0), (i * 180, 0), (i * 180, self.height - 60), 4)
 
     def select(self,row,col):
-        pass
-
-a = Board((100,100), 'easy')
-for i in range(9):
-    for j in range(9):
-        print(a.board[i][j], end ='')
-    print()
-print('\n\n\n\n\n')
-for i in range(9):
-    for j in range(9):
-        print(a.cell_board[i][j].value, end='')
-    print()
+        pygame.draw.line(self.screen, ('red'), (col*60, row * 60), (col * 60, (row+1) * 60), 4)
+        pygame.draw.line(self.screen, ('red'), (col*60, row * 60), ((col + 1) * 60, (row) * 60), 4)
+        pygame.draw.line(self.screen, ('red'), ((col + 1) * 60, row * 60), ((col + 1)* 60, (row + 1) * 60), 4)
+        pygame.draw.line(self.screen, ('red'), ((col ) * 60, (row + 1) * 60), ((col + 1) * 60, (row + 1) * 60), 4)
