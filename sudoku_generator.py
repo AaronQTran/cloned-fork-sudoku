@@ -287,8 +287,3 @@ def generate_sudoku(size, removed):
     return board
 
 
-a = generate_sudoku(9, 50)
-for i in range(9):
-    for j in range(9):
-        print(a[i][j], end='')
-    print()
