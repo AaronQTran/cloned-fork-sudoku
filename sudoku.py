@@ -61,6 +61,7 @@ def game_start_screen():
                  running = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if easy_rectangle.collidepoint(event.pos):
+
                     difficulty = "easy"
                     screen.fill(black)
                 if medium_rectangle.collidepoint(event.pos):
