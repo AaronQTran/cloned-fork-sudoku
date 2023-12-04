@@ -148,7 +148,6 @@ class SudokuGenerator:
         elif col % 3 == 2:
             box_col = col - 2
 
-
         if self.valid_in_row(row, num) and self.valid_in_col(col, num) and self.valid_in_box(box_row, box_col, num):
             return True
         return False
