@@ -10,7 +10,7 @@ class Board:
         self.height = 600
         self.screen = screen
         if diffuculty == 'easy':
-            self.difficulty = 30
+            self.difficulty = 3
         elif diffuculty == 'medium':
             self.difficulty = 40
         elif diffuculty == 'hard':
@@ -22,7 +22,6 @@ class Board:
             for j in  range(9):
                 new.append(Cell(self.board[i][j],i,j,screen))
             self.cell_board.append(new)
-            self.og_board.append(new)
 
     def draw(self):
         for i in range(0, len(self.board)+ 1):
@@ -72,11 +71,43 @@ class Board:
             num_rect = num_surf.get_rect(center=(col * 60 + 60 // 4, row * 60 + 60 // 4))
             self.screen.blit(num_surf, num_rect)
 
+    def place_number(self, row, col):
+        if self.cell_board[row][col].value == 0:
+            self.cell_board[row][col].value = self.cell_board[row][col].sketched_value
+            font = pygame.font.SysFont('arial', 30)
+            num_surf = font.render(str(self.cell_board[row][col].sketched_value), 0, ('white'))
+            num_rect = num_surf.get_rect(center=(col * 60 + 60 // 4, row * 60 + 60 // 4))
+            self.screen.blit(num_surf, num_rect)
+            self.cell_board[row][col].sketched_value = 0
+            self.cell_board[row][col].draw()
+        elif self.cell_board[row][col].value == self.cell_board[row][col].sketched_value:
+            self.cell_board[row][col].value = self.cell_board[row][col].sketched_value
+            font = pygame.font.SysFont('arial', 30)
+            num_surf = font.render(str(self.cell_board[row][col].sketched_value), 0, ('white'))
+            num_rect = num_surf.get_rect(center=(col * 60 + 60 // 4, row * 60 + 60 // 4))
+            self.screen.blit(num_surf, num_rect)
+            self.cell_board[row][col].sketched_value = 0
+            self.cell_board[row][col].draw()
+        else:
+            font = pygame.font.SysFont('arial', 30)
+            num_surf = font.render(str(self.cell_board[row][col].value), 0, ('white'))
+            num_rect = num_surf.get_rect(center=(col * 60 + 60 // 2, row * 60 + 60 // 2))
+            self.screen.blit(num_surf, num_rect)
+            self.cell_board[row][col].value = self.cell_board[row][col].sketched_value
+            self.place_number(row, col)
+
 
     def check_board(self):
+        self.update_board()
         if self.board == self.board_answer:
             return True
         else:
             return False
-
-
+    def reset_to_orignal(self):
+        pass
+    def is_full(self):
+        for i in range(9):
+            for j in range(9):
+                if self.cell_board[i][j].value == 0:
+                    return False
+        return True

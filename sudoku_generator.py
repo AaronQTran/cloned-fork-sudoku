@@ -291,7 +291,12 @@ Return: list[list] (a 2D Python list to represent the board)
 def generate_sudoku(size, removed):
     sudoku = SudokuGenerator(size, removed)
     sudoku.fill_values()
-    board_answer = sudoku.get_board()
+    board_answer = []
+    for i in range(9):
+        new = []
+        for j in range(9):
+            new.append(sudoku.get_board()[i][j])
+        board_answer.append(new)
     sudoku.remove_cells()
     board = sudoku.get_board()
     og_board = sudoku.get_board()

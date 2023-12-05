@@ -93,7 +93,7 @@ def game_screen(screen, difficulty):
     main_board.draw()
     for i in range(9):
         for j in range(9):
-            if main_board.cell_board[i][j].value != 0:
+
                 main_board.cell_board[i][j].draw()
 
     #game_screen buttons
@@ -145,7 +145,7 @@ def game_screen(screen, difficulty):
                 x, y = event.pos
                 if x <= 540 and y <= 540:
                     y, x = x//60, y//60
-                    if main_board.cell_board[x][y].value == 0:
+                    if main_board.cell_board[x][y].editable:
                         if cur_x == x and cur_y == y and main_board.cell_board[x][y].selected == True:
                             main_board.deselect(x, y)
                             cur_x, cur_y = 100, 100
@@ -187,7 +187,15 @@ def game_screen(screen, difficulty):
                         main_board.sketch(9, cur_x,cur_y)
                     if main_board.cell_board[cur_x][cur_y].sketched_value != 0:
                         if event.key == pygame.K_RETURN:
-                            print(pygame.K_RETURN)
+                            main_board.place_number(cur_x, cur_y)
+                            if main_board.is_full():
+                                if main_board.check_board():
+                                    return 'True'
+                                    pass
+                                else:
+                                    return 'False'
+                                    pass
+
 
 
 
@@ -301,7 +309,7 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((540, 600))
     difficulty = game_start_screen(screen)
-    occurrence = None  # Initialize occurrence variable outside the loop
+    occurrence = ''  # Initialize occurrence variable outside the loop
     running = True
     running_lost = True
 
@@ -313,8 +321,15 @@ def main():
             occurrence = game_screen(screen, difficulty)
         elif occurrence == "exit":
             running = False
-        else:
+        elif occurrence == '':
             occurrence = game_screen(screen, difficulty)
+        else:
+            if occurrence == 'True':
+                game_screen_end_win(screen)
+                running = False
+            else:
+                game_screen_end_lose(screen)
+                running = False
 
     #this must be implemented
     #if user_wins:
