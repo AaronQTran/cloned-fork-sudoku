@@ -1,7 +1,6 @@
 import pygame
 from sudoku_board import Board
 import sys
-from sudoku_cell import Cell
 
 
 def game_start_screen(screen):
