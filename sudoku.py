@@ -70,7 +70,10 @@ def game_start_screen(screen):
                 elif medium_rectangle.collidepoint(event.pos):
                     difficulty = "medium"
                     return difficulty
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8587557132db33469d9611d81e5536ec3414e74d
                 elif hard_rectangle.collidepoint(event.pos):
                     difficulty = "hard"
                     return difficulty
@@ -142,6 +145,8 @@ def game_screen(screen, difficulty):
                 x,y = event.pos
                 print(x//60,y//60)
                 main_board.select(y//60,x//60)
+
+
 
         # fill the screen with a color to wipe away anything from last frame
 
