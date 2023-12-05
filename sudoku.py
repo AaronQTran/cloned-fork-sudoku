@@ -70,10 +70,7 @@ def game_start_screen(screen):
                 elif medium_rectangle.collidepoint(event.pos):
                     difficulty = "medium"
                     return difficulty
-<<<<<<< HEAD
 
-=======
->>>>>>> 8587557132db33469d9611d81e5536ec3414e74d
                 elif hard_rectangle.collidepoint(event.pos):
                     difficulty = "hard"
                     return difficulty
@@ -168,32 +165,91 @@ def game_screen(screen, difficulty):
     pygame.quit()
 
 
-def game_screen_end(screen):
-
+def game_screen_end_win(screen):
+    white = (255, 255, 255)
+    black = (0, 0, 0)
+    green = (0, 255, 0)
     clock = pygame.time.Clock()
     running = True
 
+    #title characteristics
+    title_font = pygame.font.Font('freesansbold.ttf', 32)
+    text = title_font.render('Game Won!', True, green, white)
+    textRect = text.get_rect()
+    textRect.center=(540//2, 600//5)
+
+    #button
+    button_font = pygame.font.Font('freesansbold.ttf', 30)
+    exit_end_text = button_font.render("Exit", 0, (255, 255, 255))
+    exit_end_size = exit_end_text.get_size()[0]
+    exit_end_surface = pygame.Surface((exit_end_size + 20, exit_end_text.get_size()[1]+15))
+    exit_end_surface.fill(green)
+    exit_end_surface.blit(exit_end_text,(10,10))
+    exit_end_rectangle = exit_end_surface.get_rect(center =(530//2,600//2 + 50))
+
+    screen.fill("white")
+
     while running:
-        # poll for events
-        # pygame.QUIT event means the user clicked X to close your window
+
+        screen.blit(text, textRect)
+        screen.blit(exit_end_surface, exit_end_rectangle)
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if exit_end_rectangle.collidepoint(event.pos):
+                    sys.exit() #implement this in main to check if the user has won or lost
 
-        # fill the screen with a color to wipe away anything from last frame
-        screen.fill("purple")
-
-        # RENDER YOUR GAME HERE
-
-        # flip() the display to put your work on screen
         pygame.display.flip()
 
-        clock.tick(60)  # limits FPS to 60
+        clock.tick(60)
 
     pygame.quit()
     pass
 
+def game_screen_end_lose(screen):
+    white = (255, 255, 255)
+    black = (0, 0, 0)
+    green = (0, 255, 0)
+    clock = pygame.time.Clock()
+    running = True
 
+    #title characteristics
+    title_font = pygame.font.Font('freesansbold.ttf', 32)
+    text = title_font.render('Game Over :(', True, green, white)
+    textRect = text.get_rect()
+    textRect.center=(540//2, 600//5)
+
+    #button
+    button_font = pygame.font.Font('freesansbold.ttf', 30)
+    exit_restart_text = button_font.render("Restart", 0, (255, 255, 255))
+    exit_restart_size = exit_restart_text.get_size()[0]
+    exit_restart_surface = pygame.Surface((exit_restart_size + 20, exit_restart_text.get_size()[1]+15))
+    exit_restart_surface.fill(green)
+    exit_restart_surface.blit(exit_restart_text,(10,10))
+    exit_restart_rectangle = exit_restart_surface.get_rect(center =(530//2,600//2 + 50))
+
+    screen.fill("white")
+
+    while running:
+
+        screen.blit(text, textRect)
+        screen.blit(exit_restart_surface, exit_restart_rectangle)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if exit_restart_rectangle.collidepoint(event.pos):
+                    return "restart" # need to implement restart for this in main
+
+        pygame.display.flip()
+
+        clock.tick(60)
+
+    pygame.quit()
+    pass
 
 def main():
     pygame.init()
@@ -201,6 +257,7 @@ def main():
     difficulty = game_start_screen(screen)
     occurrence = None  # Initialize occurrence variable outside the loop
     running = True
+    running_lost = True
 
     while running:
         if occurrence == "reset":
@@ -213,7 +270,13 @@ def main():
         else:
             occurrence = game_screen(screen, difficulty)
 
-    #pygame.quit()
+    #this must be implemented
+    #if user_wins:
+        #game_screen_end_win(screen)
+    #elif not user_wins:
+        #game_screen_end_lose(screen)
+
+    pygame.quit()
 
 
 
