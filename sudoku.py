@@ -84,16 +84,23 @@ def game_start_screen(screen):
 
     pygame.quit()
 
-def game_screen(screen, difficulty):
+def game_screen(screen, difficulty, board = None, reset = False):
     screen.fill("white")
     green = (0, 255, 0)
     clock = pygame.time.Clock()
     running = True
-    main_board = Board(screen,difficulty)
+    if not reset:
+        main_board = Board(screen,difficulty)
+    else:
+        main_board = board
+        main_board.board = main_board.og_board
+        for i in range(9):
+            for j in range(9):
+                main_board.cell_board[i][j].value =  main_board.og_board[i][j]
+
     main_board.draw()
     for i in range(9):
         for j in range(9):
-
                 main_board.cell_board[i][j].draw()
 
     #game_screen buttons
@@ -157,7 +164,7 @@ def game_screen(screen, difficulty):
                             main_board.select(x, y)
                             cur_x, cur_y = x, y
                 if reset_rectangle.collidepoint(event.pos):
-                    return "reset", main_board.og_board, main_board.board
+                    return "reset", main_board
                     pass
                 if restart_rectangle.collidepoint(event.pos):
                     return "restart"
@@ -314,8 +321,8 @@ def main():
     running_lost = True
 
     while running:
-        if occurrence == "reset":
-            pass #need to work on this
+        if 'reset' in occurrence:
+            occurrence = game_screen(screen, difficulty, occurrence[1], True)
         elif occurrence == "restart":
             difficulty = game_start_screen(screen)
             occurrence = game_screen(screen, difficulty)
