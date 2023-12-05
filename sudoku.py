@@ -156,6 +156,14 @@ def game_screen(screen, difficulty):
                             main_board.deselect(cur_x, cur_y)
                             main_board.select(x, y)
                             cur_x, cur_y = x, y
+                if reset_rectangle.collidepoint(event.pos):
+                    return "reset", main_board.og_board, main_board.board
+                    pass
+                if restart_rectangle.collidepoint(event.pos):
+                    return "restart"
+                    pass
+                if exit_rectangle.collidepoint(event.pos):
+                    return "exit"
 
             if cur_x != 100:
                 if event.type == pygame.KEYDOWN:
@@ -190,14 +198,7 @@ def game_screen(screen, difficulty):
                 # if exit_rectangle.collidepoint(event.pos):
                 #     pass
 
-                if reset_rectangle.collidepoint(event.pos):
-                    return "reset", main_board.og_board, main_board.board
-                    pass
-                if restart_rectangle.collidepoint(event.pos):
-                    return "restart"
-                    pass
-                if exit_rectangle.collidepoint(event.pos):
-                    return "exit"
+
 
 
 

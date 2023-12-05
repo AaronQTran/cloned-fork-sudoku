@@ -50,3 +50,10 @@ class Board:
         for i in range(9):
             for j in range(9):
                 self.board[i][j] = self.cell_board[i][j].value
+
+    def check_board(self):
+        if self.board == self.board_answer:
+            return True
+        else:
+            return False
+
