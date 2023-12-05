@@ -311,7 +311,7 @@ def main():
     difficulty = game_start_screen(screen)
     occurrence = ''  # Initialize occurrence variable outside the loop
     running = True
-    running_lost = True
+    running_lost_end = True
 
     while running:
         if occurrence == "reset":
@@ -328,8 +328,11 @@ def main():
                 game_screen_end_win(screen)
                 running = False
             else:
-                game_screen_end_lose(screen)
-                running = False
+                lost_end_return = game_screen_end_lose(screen)
+                while running_lost_end:
+                    if lost_end_return == "restart":
+                        occurrence = "restart"
+                        break
 
     #this must be implemented
     #if user_wins:
