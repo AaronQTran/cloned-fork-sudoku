@@ -164,6 +164,7 @@ def game_screen(screen, difficulty):
                     pass
                 if exit_rectangle.collidepoint(event.pos):
                     return "exit"
+
             if cur_x != 100:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_1:
@@ -200,8 +201,6 @@ def game_screen(screen, difficulty):
                 #     pass
                 # if exit_rectangle.collidepoint(event.pos):
                 #     pass
-
-                #
 
 
 
