@@ -4,6 +4,7 @@ import pygame
 
 
 class Board:
+    selected = False
     def __init__(self, screen, diffuculty):
         self.width = 540
         self.height = 600
@@ -34,10 +35,18 @@ class Board:
             pygame.draw.line(self.screen, (0,0,0), (i * 180, 0), (i * 180, self.height - 60), 4)
 
     def select(self,row,col):
-        pygame.draw.line(self.screen, ('red'), (col*60, row * 60), (col * 60, (row+1) * 60), 4)
-        pygame.draw.line(self.screen, ('red'), (col*60, row * 60), ((col + 1) * 60, (row) * 60), 4)
-        pygame.draw.line(self.screen, ('red'), ((col + 1) * 60, row * 60), ((col + 1)* 60, (row + 1) * 60), 4)
-        pygame.draw.line(self.screen, ('red'), ((col ) * 60, (row + 1) * 60), ((col + 1) * 60, (row + 1) * 60), 4)
-
-
-
+        pygame.draw.line(self.screen, ('red'), (col*60, row * 60), (col * 60, (row+1) * 60), 1)
+        pygame.draw.line(self.screen, ('red'), (col*60, row * 60), ((col + 1) * 60, (row) * 60), 1)
+        pygame.draw.line(self.screen, ('red'), ((col + 1) * 60, row * 60), ((col + 1)* 60, (row + 1) * 60), 1)
+        pygame.draw.line(self.screen, ('red'), ((col ) * 60, (row + 1) * 60), ((col + 1) * 60, (row + 1) * 60), 1)
+        self.cell_board[row][col].selected = True
+    def deselect(self,row,col):
+        pygame.draw.line(self.screen, ('black'), (col*60, row * 60), (col * 60, (row+1) * 60), 1)
+        pygame.draw.line(self.screen, ('black'), (col*60, row * 60), ((col + 1) * 60, (row) * 60), 1)
+        pygame.draw.line(self.screen, ('black'), ((col + 1) * 60, row * 60), ((col + 1)* 60, (row + 1) * 60), 1)
+        pygame.draw.line(self.screen, ('black'), ((col ) * 60, (row + 1) * 60), ((col + 1) * 60, (row + 1) * 60), 1)
+        self.cell_board[row][col].selected = False
+    def update_board(self):
+        for i in range(9):
+            for j in range(9):
+                self.board[i][j] = self.cell_board[i][j].value

@@ -126,28 +126,59 @@ def game_screen(screen, difficulty):
     screen.blit(exit_surface, exit_rectangle)
 
 
-    #print("yo")
+    cur_x, cur_y = 100, 100
     while running:
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
             if event.type == pygame.MOUSEBUTTONDOWN:
+                x, y = event.pos
+                if x <= 540 and y <= 540:
+                    y, x = x//60, y//60
+                    if main_board.cell_board[x][y].value == 0:
+                        if cur_x == x and cur_y == y and main_board.cell_board[x][y].selected == True:
+                            main_board.deselect(x, y)
+                            cur_x, cur_y = 100, 100
+                        elif cur_x == 100:
+                            main_board.select(x, y)
+                            cur_x, cur_y = x, y
+                        else:
+                            main_board.deselect(cur_x, cur_y)
+                            main_board.select(x, y)
+                            cur_x, cur_y = x, y
 
-                x,y = event.pos
-                print(x//60,y//60)
-                main_board.select(y//60,x//60)
+            if cur_x != 100:
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_1:
+                        print(1)
+                    if event.key == pygame.K_2:
+                        print(2)
+                    if event.key == pygame.K_3:
+                        print(3)
+                    if event.key == pygame.K_4:
+                        print(4)
+                    if event.key == pygame.K_5:
+                        print(5)
+                    if event.key == pygame.K_6:
+                        print(6)
+                    if event.key == pygame.K_7:
+                        print(7)
+                    if event.key == pygame.K_8:
+                        print(8)
+                    if event.key == pygame.K_9:
+                        print(9)
 
 
 
         # fill the screen with a color to wipe away anything from last frame
 
-                if reset_rectangle.collidepoint(event.pos):
-                    pass
-                if restart_rectangle.collidepoint(event.pos):
-                    pass
-                if exit_rectangle.collidepoint(event.pos):
-                    pass
+                # if reset_rectangle.collidepoint(event.pos):
+                #     pass
+                # if restart_rectangle.collidepoint(event.pos):
+                #     pass
+                # if exit_rectangle.collidepoint(event.pos):
+                #     pass
 
 
 
