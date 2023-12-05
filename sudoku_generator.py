@@ -283,6 +283,7 @@ def generate_sudoku(size, removed):
     board_answer = sudoku.get_board()
     sudoku.remove_cells()
     board = sudoku.get_board()
-    return board, board_answer
+    og_board = sudoku.get_board()
+    return board, board_answer, og_board
 
 
