@@ -81,6 +81,7 @@ def game_start_screen(screen):
 
     pygame.quit()
 
+
 def game_screen(screen, difficulty, board = None, reset = False):
     pygame.display.set_caption('Sudoku')
     screen.fill("white")
@@ -94,7 +95,7 @@ def game_screen(screen, difficulty, board = None, reset = False):
         main_board.board = main_board.og_board
         for i in range(9):
             for j in range(9):
-                main_board.cell_board[i][j].value =  main_board.og_board[i][j]
+                main_board.cell_board[i][j].value = main_board.og_board[i][j]
 
     main_board.draw()
     for i in range(9):
@@ -322,6 +323,7 @@ def main():
     running_lost_end = True
 
     while running:
+        # Ultimatly checks which button is pressed and how to continue on
         if 'reset' in occurrence:
             occurrence = game_screen(screen, difficulty, occurrence[1], True)
         elif occurrence == "restart":

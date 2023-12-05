@@ -26,7 +26,7 @@ class Cell:
             num_surf = font.render(str(self.value), 0, ('orange'))
             num_rect = num_surf.get_rect(center=(self.col * 60 + 60 // 2, self.row * 60 + 60 // 2))
             self.screen.blit(num_surf, num_rect)
-        # All non editable numbers are black
+        # All non-editable numbers are black
         elif self.value != 0:
             font = pygame.font.SysFont('arial', 30)
             num_surf = font.render(str(self.value), 0, (0, 0, 0))
