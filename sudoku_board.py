@@ -10,7 +10,7 @@ class Board:
         self.height = 600
         self.screen = screen
         if diffuculty == 'easy':
-            self.difficulty = 2
+            self.difficulty = 30
         elif diffuculty == 'medium':
             self.difficulty = 40
         elif diffuculty == 'hard':
