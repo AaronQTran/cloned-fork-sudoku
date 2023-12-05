@@ -5,9 +5,7 @@ from sudoku_cell import Cell
 
 
 def game_start_screen(screen):
-
-
-
+    pygame.display.set_caption('Sudoku')
     clock = pygame.time.Clock()
     running = True
 
@@ -85,6 +83,7 @@ def game_start_screen(screen):
     pygame.quit()
 
 def game_screen(screen, difficulty, board = None, reset = False):
+    pygame.display.set_caption('Sudoku')
     screen.fill("white")
     green = (0, 255, 0)
     clock = pygame.time.Clock()
@@ -227,6 +226,7 @@ def game_screen(screen, difficulty, board = None, reset = False):
 
 
 def game_screen_end_win(screen):
+    pygame.display.set_caption('Sudoku')
     white = (255, 255, 255)
     black = (0, 0, 0)
     green = (0, 255, 0)
@@ -269,7 +269,9 @@ def game_screen_end_win(screen):
     pygame.quit()
     pass
 
+# function to show screen for when user loses
 def game_screen_end_lose(screen):
+    pygame.display.set_caption('Sudoku')
     white = (255, 255, 255)
     black = (0, 0, 0)
     green = (0, 255, 0)
@@ -345,7 +347,7 @@ def main():
     #if user_wins:
         #game_screen_end_win(screen)
     #elif not user_wins:
-        #game_screen_end_lose(screen)
+        #game_screen_end_lose(screen)ss
 
     pygame.quit()
 
