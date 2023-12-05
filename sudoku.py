@@ -191,6 +191,12 @@ def game_screen(screen, difficulty, board = None, reset = False):
                         main_board.sketch(8, cur_x,cur_y)
                     elif event.key == pygame.K_9:
                         main_board.sketch(9, cur_x,cur_y)
+                    if event.key == pygame.K_BACKSPACE:
+                        font = pygame.font.SysFont('arial', 30)
+                        num_surf = font.render(str(main_board.cell_board[cur_x][cur_y].value), 0, ('white'))
+                        num_rect = num_surf.get_rect(center=(cur_y * 60 + 60 // 2, cur_x * 60 + 60 // 2))
+                        screen.blit(num_surf, num_rect)
+                        main_board.cell_board[cur_x][cur_y].value = 0
                     if main_board.cell_board[cur_x][cur_y].sketched_value != 0:
                         if event.key == pygame.K_RETURN:
                             main_board.place_number(cur_x, cur_y)
@@ -323,7 +329,7 @@ def main():
     running_lost_end = True
 
     while running:
-        # Ultimatly checks which button is pressed and how to continue on
+        # Ultimatly checks which button is pressed and how to continue on-
         if 'reset' in occurrence:
             occurrence = game_screen(screen, difficulty, occurrence[1], True)
         elif occurrence == "restart":
