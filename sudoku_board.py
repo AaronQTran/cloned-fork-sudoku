@@ -15,14 +15,14 @@ class Board:
             self.difficulty = 40
         elif diffuculty == 'hard':
             self.difficulty = 50
-        self.board, self.board_answer = sudoku_generator.generate_sudoku(9, self.difficulty)
+        self.board, self.board_answer, self.og_board = sudoku_generator.generate_sudoku(9, self.difficulty)
         self.cell_board = []
         for i in range(9):
             new = []
             for j in  range(9):
                 new.append(Cell(self.board[i][j],i,j,screen))
             self.cell_board.append(new)
-
+            self.og_board.append(new)
 
     def draw(self):
         for i in range(0, len(self.board)+ 1):
