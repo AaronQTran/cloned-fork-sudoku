@@ -50,3 +50,23 @@ class Board:
         for i in range(9):
             for j in range(9):
                 self.board[i][j] = self.cell_board[i][j].value
+    def sketch(self, value, row, col):
+        if self.cell_board[row][col].sketched_value == 0:
+            self.cell_board[row][col].sketched_value = value
+            font = pygame.font.SysFont('arial', 30)
+            num_surf = font.render(str(value), 0, ('grey'))
+            num_rect = num_surf.get_rect(center=(col * 60 + 60 // 4, row * 60 + 60 // 4))
+            self.screen.blit(num_surf, num_rect)
+        elif self.cell_board[row][col].sketched_value != value:
+            font = pygame.font.SysFont('arial', 30)
+            num_surf = font.render(str(self.cell_board[row][col].sketched_value), 0, ('white'))
+            num_rect = num_surf.get_rect(center=(col * 60 + 60 // 4, row * 60 + 60 // 4))
+            self.screen.blit(num_surf, num_rect)
+            self.cell_board[row][col].sketched_value = 0
+            self.sketch(value, row, col)
+        else:
+            self.cell_board[row][col].sketched_value = value
+            font = pygame.font.SysFont('arial', 30)
+            num_surf = font.render(str(value), 0, ('grey'))
+            num_rect = num_surf.get_rect(center=(col * 60 + 60 // 4, row * 60 + 60 // 4))
+            self.screen.blit(num_surf, num_rect)

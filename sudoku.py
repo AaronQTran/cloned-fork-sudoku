@@ -156,27 +156,38 @@ def game_screen(screen, difficulty):
                             main_board.deselect(cur_x, cur_y)
                             main_board.select(x, y)
                             cur_x, cur_y = x, y
-
+                if reset_rectangle.collidepoint(event.pos):
+                    return "reset", main_board.og_board, main_board.board
+                    pass
+                if restart_rectangle.collidepoint(event.pos):
+                    return "restart"
+                    pass
+                if exit_rectangle.collidepoint(event.pos):
+                    return "exit"
             if cur_x != 100:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_1:
-                        print(1)
-                    if event.key == pygame.K_2:
-                        print(2)
-                    if event.key == pygame.K_3:
-                        print(3)
-                    if event.key == pygame.K_4:
-                        print(4)
-                    if event.key == pygame.K_5:
-                        print(5)
-                    if event.key == pygame.K_6:
-                        print(6)
-                    if event.key == pygame.K_7:
-                        print(7)
-                    if event.key == pygame.K_8:
-                        print(8)
-                    if event.key == pygame.K_9:
-                        print(9)
+                        main_board.sketch(1, cur_x,cur_y)
+                    elif event.key == pygame.K_2:
+                        main_board.sketch(2, cur_x,cur_y)
+                    elif event.key == pygame.K_3:
+                        main_board.sketch(3, cur_x,cur_y)
+                    elif event.key == pygame.K_4:
+                        main_board.sketch(4, cur_x,cur_y)
+                    elif event.key == pygame.K_5:
+                        main_board.sketch(5, cur_x, cur_y)
+                    elif event.key == pygame.K_6:
+                        main_board.sketch(6, cur_x, cur_y)
+                    elif event.key == pygame.K_7:
+                        main_board.sketch(7, cur_x,cur_y)
+                    elif event.key == pygame.K_8:
+                        main_board.sketch(8, cur_x,cur_y)
+                    elif event.key == pygame.K_9:
+                        main_board.sketch(9, cur_x,cur_y)
+                    if main_board.cell_board[cur_x][cur_y].sketched_value != 0:
+                        if event.key == pygame.K_RETURN:
+                            print(pygame.K_RETURN)
+
 
 
 
@@ -190,15 +201,7 @@ def game_screen(screen, difficulty):
                 # if exit_rectangle.collidepoint(event.pos):
                 #     pass
 
-                if reset_rectangle.collidepoint(event.pos):
-                    return "reset", main_board.og_board, main_board.board
-                    pass
-                if restart_rectangle.collidepoint(event.pos):
-                    return "restart"
-                    pass
-                if exit_rectangle.collidepoint(event.pos):
-                    return "exit"
-
+                #
 
 
 
